@@ -1,27 +1,4 @@
 <section class="product-tabs section-padding wow fadeIn animated">
-    {{-- Feature --}}
-    <div class="container">
-        <div class="tab-header">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <h3>Feature</h3>
-            </ul>
-            <a href="{{ route('features') }}" class="view-more d-none d-md-flex">View More<i
-                    class="fi-rs-angle-double-small-right"></i></a>
-        </div>
-        <div class="tab-content wow fadeIn animated" id="myTabContent">
-            <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                <div class="row product-grid-4">
-                    @foreach ($featureds as $featured)
-                        <div class="col-lg-3 col-md-4 col-6 col-sm-6">
-                            <x-product :product="$featured" />
-                        </div>
-                    @endforeach
-                </div>
-                <!--End product-grid-4-->
-            </div>
-        </div>
-    </div>
-
     {{-- popular category --}}
     <section class="popular-categories section-padding mt-15">
         <div class="container wow fadeIn animated">
@@ -46,6 +23,29 @@
             </div>
         </div>
     </section>
+
+    {{-- Feature --}}
+    <div class="container">
+        <div class="tab-header">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <h3>Feature</h3>
+            </ul>
+            <a href="{{ route('features') }}" class="view-more d-none d-md-flex">View More<i
+                    class="fi-rs-angle-double-small-right"></i></a>
+        </div>
+        <div class="tab-content wow fadeIn animated" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                <div class="row product-grid-4">
+                    @foreach ($featureds as $featured)
+                        <div class="col-lg-3 col-md-4 col-6 col-sm-6">
+                            <x-product :product="$featured" />
+                        </div>
+                    @endforeach
+                </div>
+                <!--End product-grid-4-->
+            </div>
+        </div>
+    </div>
 
     {{-- Popular --}}
     <div class="container">

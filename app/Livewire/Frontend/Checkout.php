@@ -20,6 +20,7 @@ class Checkout extends Component
 {
     public $shipping_id = null;
     public $message = null;
+    public $shipping_fee = null;
 
     #[Validate('required')]
     public $shippingPrice = null;
@@ -67,9 +68,9 @@ class Checkout extends Component
     {
         //dd(Auth::check() ?? Auth::user()->id);
         $this->validate();
-        if ($this->shippingPrice == 0) {
-            return back();
-        }
+        // if ($this->shippingPrice == 0) {
+        //     return back();
+        // }
 
         if (CookieSD::data()['total'] == 0) {
             $this->addError('cart', 'Cart is empty');
@@ -143,12 +144,15 @@ class Checkout extends Component
         }
     }
 
-    public function ship($id)
+    public function ship($id, $ship)
     {
         $this->shipping_id = $id;
-
-        $shipping = Shipping::find($id);
-        $this->shippingPrice = $shipping->price;
+        if ($ship == 1) {
+            $this->shippingPrice = 0;
+        } else {
+            $shipping = Shipping::find($id);
+            $this->shippingPrice = $shipping->price;
+        }
     }
 
     public function mount()

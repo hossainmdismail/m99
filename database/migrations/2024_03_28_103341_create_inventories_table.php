@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('color_id')->nullable();
             $table->integer('size_id')->nullable();
-            $table->string('sku')->unique();
             $table->string('image')->nullable();
             $table->bigInteger('total_qnt')->default(0);
             $table->bigInteger('qnt')->default(0);

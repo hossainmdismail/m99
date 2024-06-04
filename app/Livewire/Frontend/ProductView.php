@@ -13,7 +13,7 @@ class ProductView extends Component
     protected $rules = [
         'quantity'  => 'required|numeric|min:1|max:100', // Example: min value is 1 and max value is 100
         'color_id'  => 'required',
-        'size_id'   => 'required',
+        // 'size_id'   => 'required',
     ];
 
     public function addToCart()

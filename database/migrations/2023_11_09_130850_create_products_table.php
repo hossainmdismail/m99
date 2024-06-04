@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->integer('category_id');
             $table->string('name');
+            $table->string('sku', 255)->unique()->nullable();
             $table->string('slugs')->unique();
             $table->longText('short_description');
             $table->longText('description');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->enum('sp_type', ['Fixed', 'Percent']);
             $table->integer('featured')->default(0);
             $table->integer('popular')->default(0);
+            $table->integer('shipping_fee')->default(0);
             $table->enum('status', ['active', 'deactive']);
             $table->string('seo_title')->nullable();
             $table->longText('seo_description')->nullable();

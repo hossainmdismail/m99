@@ -49,6 +49,8 @@ Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy
 Route::get('/sitemap', [SEOController::class, 'sitemap'])->name('sitemap');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/{id}', [ProfileController::class, 'editOrder'])->name('profile.order.edit');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.order.update');
 
 
 // Route::get('/unsubscribe/{user}', function (Request $request) {
@@ -60,7 +62,7 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 //     // ...
 // })->name('unsubscribe');
 
-Route::middleware(['admin'])->prefix('ek_admin')->group(function () {
+Route::middleware(['admin'])->prefix('backdrop')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::resource('/country', CountryController::class);
     Route::get('/create/admin', [AdminController::class, 'create_admin'])->name('create.admin');

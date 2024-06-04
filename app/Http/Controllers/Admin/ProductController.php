@@ -57,6 +57,7 @@ class ProductController extends Controller
             'product_name'      => 'required',
             'short_description' => 'required',
             'description'       => 'required',
+            'sku'               => 'required|unique:products,sku',
             'service'           => 'required|array|present',
             //new
             'price'             => 'required|integer',
@@ -82,12 +83,14 @@ class ProductController extends Controller
             $product = new Product();
             $product->category_id       = $request->category_id;
             $product->name              = $request->product_name;
+            $product->sku               = $request->sku;
             $product->slugs             = $slug;
             $product->short_description = $request->short_description;
             $product->description       = $request->description;
             $product->video_link        = $request->link;
             $product->status            = $request->btn;
             $product->featured          = $request->featured == 'on' ? 1 : 0;
+            $product->shipping_fee      = $request->shipping_fee == 'on' ? 1 : 0;
             $product->popular           = $request->popular == 'on' ? 1 : 0;
             $product->seo_title         = $request->seo_title;
             $product->seo_description   = $request->seo_description;
@@ -113,12 +116,11 @@ class ProductController extends Controller
             }
 
             DB::commit();
+            return redirect()->route('product.edit', $product_id)->with('succ', 'Product added successfully, now you can add product attributes');
         } catch (\Exception $e) {
             DB::rollback();
             return back()->with('err', $e->getMessage());
         }
-
-        return back()->with('succ', 'Product added successfully');
     }
 
     public function show(string $id)
@@ -143,6 +145,7 @@ class ProductController extends Controller
             'btn'               => 'required',
             'category_id'       => 'required|integer',
             'product_name'      => 'required',
+            'sku'               => 'required',
             'short_description' => 'required',
             'description'       => 'required',
             //new
@@ -167,6 +170,7 @@ class ProductController extends Controller
             $product = Product::find($id);
             $product->category_id       = $request->category_id;
             $product->name              = $request->product_name;
+            $product->sku               = $request->sku;
             $product->slugs             = $slug;
             $product->short_description = $request->short_description;
             $product->description       = $request->description;
@@ -175,6 +179,10 @@ class ProductController extends Controller
             $product->seo_title         = $request->seo_title;
             $product->seo_description   = $request->seo_description;
             $product->seo_tags          = $request->seo_tags;
+            //tags
+            $product->featured          = $request->featured == 'on' ? 1 : 0;
+            $product->shipping_fee      = $request->shipping_fee == 'on' ? 1 : 0;
+            $product->popular           = $request->popular == 'on' ? 1 : 0;
             //new
             $product->price             = $request->price;
             $product->stock_price       = $request->stock_price;

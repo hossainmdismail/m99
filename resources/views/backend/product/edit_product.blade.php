@@ -22,12 +22,12 @@
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
                                     name="image" value="{{ old('image') }}">
                             </div>
-                            <div class="mb-4 col-12">
+                            {{-- <div class="mb-4 col-12">
                                 <label for="product_name" class="form-label">SKU</label>
                                 <input type="text" placeholder="Entire Name"
                                     class="form-control @error('sku') is-invalid @enderror" name="sku"
                                     value="{{ old('sku') }}">
-                            </div>
+                            </div> --}}
                             <div class="mb-4 col-md-6">
                                 <label for="product_name" class="form-label">Color</label>
                                 <select name="color_id" class="form-select @error('color_id') is-invalid @enderror"
@@ -55,36 +55,6 @@
                                 </select>
                             </div>
                             <hr>
-                            {{-- <div class="mb-4 col-md-6">
-                                <label for="price" class="form-label">Price</label>
-                                <input type="text" placeholder="Entire Name"
-                                    class="form-control @error('price') is-invalid @enderror" name="price"
-                                    value="{{ old('price') }}">
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="stock_price" class="form-label">Stock
-                                    Price</label>
-                                <input type="number" placeholder="Entire Name"
-                                    class="form-control @error('stock_price') is-invalid @enderror" name="stock_price"
-                                    value="{{ old('stock_price') }}">
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="s_price" class="form-label">Discount
-                                    Price</label>
-                                <input type="number" placeholder="Entire Name"
-                                    class="form-control @error('s_price') is-invalid @enderror" name="s_price"
-                                    value="{{ old('s_price') }}">
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="product_name" class="form-label">Type</label>
-                                <select name="sp_type" id=""
-                                    class="form-control @error('sp_type') is-invalid @enderror">
-                                    <option value="">Discount Type</option>
-                                    <option value="Fixed" @if (old('sp_type') == 'Fixed') selected @endif>Fixed</option>
-                                    <option value="Percent" @if (old('sp_type') == 'Percent') selected @endif>Percentage
-                                    </option>
-                                </select>
-                            </div> --}}
                             <div class="mb-4 col-md-6">
                                 <label for="qnt" class="form-label">Quantity</label>
                                 <input type="number" placeholder="0"
@@ -151,34 +121,6 @@
                                 </select>
                             </div>
                             <hr>
-                            {{-- <div class="mb-4 col-md-6">
-                                <label for="price" class="form-label">Price</label>
-                                <input type="text" placeholder="Entire Name"
-                                    class="form-control @error('price') is-invalid @enderror" name="price">
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="stock_price" class="form-label">Stock
-                                    Price</label>
-                                <input type="number" placeholder="Entire Name"
-                                    class="form-control @error('stock_price') is-invalid @enderror" name="stock_price">
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="s_price" class="form-label">Discount
-                                    Price</label>
-                                <input type="number" placeholder="Entire Name"
-                                    class="form-control @error('s_price') is-invalid @enderror" name="s_price">
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="product_name" class="form-label">Type</label>
-                                <select name="sp_type" id=""
-                                    class="form-control @error('sp_type') is-invalid @enderror">
-                                    <option value="">Discount Type</option>
-                                    <option value="Fixed" @if (old('sp_type') == 'Fixed') selected @endif>Fixed
-                                    </option>
-                                    <option value="Percent" @if (old('sp_type') == 'Percent') selected @endif>Percentage
-                                    </option>
-                                </select>
-                            </div> --}}
                             <div class="mb-4 col-md-6">
                                 <label for="avlqnt" class="form-label">Available</label>
                                 <input type="number" placeholder="0"
@@ -279,6 +221,14 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="sku" class="form-label">SKU</label>
+                                                    <input type="text" placeholder="Stock-keeping unit"
+                                                        class="form-control" name="sku" value="{{ $request->sku }}">
+                                                </div>
+                                            </div>
+
                                             <div class="col-12">
                                                 <div class="mb-4">
                                                     <label for="product_name" class="form-label">Short Description</label>
@@ -311,14 +261,15 @@
                                                 <label for="price" class="form-label">Price</label>
                                                 <input type="text" placeholder="Entire Name"
                                                     class="form-control @error('price') is-invalid @enderror"
-                                                    name="price" value="{{ $request->price }}">
+                                                    name="price" value="{{ number_format($request->price, 0) }}">
                                             </div>
                                             <div class="mb-4 col-md-6">
                                                 <label for="stock_price" class="form-label">Stock
                                                     Price</label>
                                                 <input type="number" placeholder="Entire Name"
                                                     class="form-control @error('stock_price') is-invalid @enderror"
-                                                    name="stock_price" value="{{ $request->stock_price }}">
+                                                    name="stock_price"
+                                                    value="{{ number_format($request->stock_price, 0) }}">
                                             </div>
                                             <div class="mb-4 col-md-6">
                                                 <label for="s_price" class="form-label">Discount
@@ -338,6 +289,24 @@
                                                         @if ($request->sp_type == 'Percent') selected @endif>Percentage
                                                     </option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="form-check form-switch">
+                                                <label class="form-check-label" for="checkFeatured">Feature
+                                                    {{ $request->featured }}</label>
+                                                <input class="form-check-input" name="featured" type="checkbox"
+                                                    id="checkFeatured" {{ $request->featured == 1 ? 'checked' : '' }}>
+                                            </div>
+                                            <div class="form-check form-switch">
+                                                <label class="form-check-label" for="checkPopular">Popular</label>
+                                                <input class="form-check-input" name="popular" type="checkbox"
+                                                    id="checkPopular" {{ $request->popular == 1 ? 'checked' : '' }}>
+                                            </div>
+                                            <div class="form-check form-switch">
+                                                <label class="form-check-label" for="shipping_fee">Shipping free</label>
+                                                <input class="form-check-input" name="shipping_fee" type="checkbox"
+                                                    id="shipping_fee" {{ $request->shipping_fee == 1 ? 'checked' : '' }}>
                                             </div>
                                         </div>
                                     </div>
@@ -409,8 +378,8 @@
                                                             src="{{ asset('files/product/' . $attr->image) }}"
                                                             alt="">
                                                     </td>
-                                                    <td>{{ $attr->color ? $attr->color->name : 'NULL' }} /
-                                                        {{ $attr->size ? $attr->size->name : 'NULL' }}</td>
+                                                    <td>{{ $attr->color ? $attr->color->name : 'Null' }} /
+                                                        {{ $attr->size ? $attr->size->name : 'Null' }}</td>
                                                     {{-- <td><b> <span>৳</span> {{ $attr->price }} </b></td> --}}
                                                     <td>
                                                         <span class="badge bg-info text-dark">{{ $attr->qnt }}</span>
@@ -419,11 +388,6 @@
                                                         <span
                                                             class="badge bg-{{ $request->status == 'active' ? 'success' : 'warning' }}">{{ $request->status }}</span>
                                                     </td>
-
-                                                    {{-- <td>
-                                                        {{ $attr->s_price }}
-                                                        {{ $attr->sp_type == 'Fixed' ? '৳' : '%' }}
-                                                    </td> --}}
                                                     <td>
                                                         <a data-bs-val="{{ route('attributes.edit', $attr->id) }}"
                                                             data-bs-peram="{{ $attr->id }}"

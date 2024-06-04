@@ -35,13 +35,9 @@ class AttributeController extends Controller
     {
         $request->validate([
             'id'            => 'required|integer',
-            'sku'           => 'required|unique:inventories,sku',
+            // 'sku'           => 'required|unique:inventories,sku',
             'color_id'      => 'required|integer',
-            'size_id'       => 'required|integer',
-            // 'price'         => 'required|integer',
-            // 'stock_price'   => 'required|integer',
-            // 's_price'       => 'required|integer',
-            // 'sp_type'       => 'required',
+            // 'size_id'       => 'required|integer',
             'qnt'           => 'required|integer',
             'image'         => 'required'
         ]);
@@ -50,13 +46,9 @@ class AttributeController extends Controller
         try {
             $inventory = new Inventory();
             $inventory->product_id  = $request->id;
-            $inventory->sku         = $request->sku;
+            // $inventory->sku         = $request->sku;
             $inventory->color_id    = $request->color_id;
             $inventory->size_id     = $request->size_id;
-            // $inventory->price       = $request->price;
-            // $inventory->stock_price = $request->stock_price;
-            // $inventory->s_price     = $request->s_price;
-            // $inventory->sp_type     = $request->sp_type;
             $inventory->qnt         = $request->qnt;
 
             //Upload Photo
@@ -105,25 +97,14 @@ class AttributeController extends Controller
     {
         $request->validate([
             'id'            => 'required|integer',
-            // 'sku'           => 'required',
             'color_id'      => 'required|integer',
             'size_id'       => 'required|integer',
-            //'price'         => 'required|integer',
-            //'stock_price'   => 'required|integer',
-            //'s_price'       => 'required|integer',
-            //'sp_type'       => 'required',
-            // 'qnt'           => 'required|integer',
-            // 'image'         => 'required'
         ]);
 
         $attributes = Inventory::find($inventory);
         if ($attributes) {
             $attributes->color_id = $request->color_id;
             $attributes->size_id = $request->size_id;
-            //$attributes->price = $request->price;
-            //$attributes->stock_price = $request->stock_price;
-            //$attributes->s_price = $request->s_price;
-            //$attributes->sp_type = $request->sp_type;
             if ($request->qnt) {
                 $attributes->qnt = $attributes->qnt + $request->qnt;
             }

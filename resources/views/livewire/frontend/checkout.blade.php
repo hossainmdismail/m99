@@ -1,3 +1,6 @@
+@php
+    $ship = 0;
+@endphp
 <main class="main">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
@@ -31,6 +34,9 @@
                             </thead>
                             <tbody>
                                 @foreach ($products['products'] as $product)
+                                    @if ($product['shipping'] == 1)
+                                        {{ $ship = 1 }}
+                                    @endif
                                     <tr>
                                         <td class="image product-thumbnail"><img
                                                 src="{{ asset('files/product/' . $product['image']) }}" alt="#">
@@ -48,7 +54,7 @@
                                             <div class="detail-qty border radius  m-auto">
                                                 <a wire:click="decrement({{ $product['id'] }})" class="qty-down"><i
                                                         class="fi-rs-angle-small-down"></i></a>
-                                                <span wire:loading class="spinner-border spinner-border-sm"></span>
+                                                <span wire:loading class="loading_span"></span>
                                                 <span class="qty-val" wire:loading.remove>
                                                     {{ $product['quantity'] }}</span>
                                                 <a wire:click="increment({{ $product['id'] }})" class="qty-up"><i
@@ -90,6 +96,13 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <input type="number"
+                                                class="form-control input-sm @error('number') is-invalid @enderror"
+                                                wire:model="number" aria-label="lg" placeholder=" +88">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class=" input-group mb-3">
                                             <input type="email"
                                                 class="form-control input-sm @error('email') is-invalid @enderror"
@@ -97,20 +110,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="input-group mb-3">
-                                            <input type="number"
-                                                class="form-control input-sm @error('number') is-invalid @enderror"
-                                                wire:model="number" aria-label="lg" placeholder=" 017xxxxxxxx">
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         {{-- <label for="">Address</label> --}}
                                         <div class="input-group mb-3">
                                             <input type="text"
                                                 class="form-control input-sm @error('address') is-invalid @enderror"
-                                                wire:model="address" aria-label="lg"
-                                                placeholder="Address ( থানা+জেলা )">
+                                                wire:model="address" aria-label="lg" placeholder="Address ">
                                         </div>
                                     </div>
                                     <div class="col">
@@ -135,7 +140,8 @@
                                         @enderror
                                         @foreach ($shippings as $key => $shipping)
                                             <div class="frb frb-primary">
-                                                <input type="radio" wire:click="ship({{ $shipping->id }})"
+                                                <input type="radio"
+                                                    wire:click="ship({{ $shipping->id }},{{ $ship }})"
                                                     id="radio-button-{{ $key + 1 }}" name="radio-button">
                                                 <label for="radio-button-{{ $key + 1 }}">
                                                     <span class="frb-title">{{ $shipping->name }}</span>

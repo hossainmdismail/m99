@@ -115,7 +115,6 @@ class CookieSD
                     $quantity = max(1, $cookieItem['quantity']);
 
                     if ($inventoryItem) {
-                        // You can map the fields accordingly to your Inventory model
                         return [
                             'id'            => $inventoryItem->id,
                             'name'          => $inventoryItem->product ? $inventoryItem->product->name : 'Unknown',
@@ -125,6 +124,7 @@ class CookieSD
                             'quantity'      => $quantity,
                             'image'         => $inventoryItem->image,
                             'totalPrice'    => $inventoryItem->product->getFinalPrice() * $quantity,
+                            'shipping'      => $inventoryItem->product->shipping_fee,
                             // Add other fields as needed
                         ];
                     }

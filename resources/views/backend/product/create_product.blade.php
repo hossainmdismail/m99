@@ -109,6 +109,15 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <label for="sku" class="form-label">SKU</label>
+                                                <input type="text" placeholder="Stock-keeping unit"
+                                                    class="form-control @error('sku') is-invalid @enderror" name="sku"
+                                                    value="{{ old('sku') }}">
+                                            </div>
+                                        </div>
+
                                         <div class="col-12">
                                             <div class="mb-4">
                                                 <label for="product_name"
@@ -134,126 +143,6 @@
                                 </div>
                             </div> <!-- card end// -->
                         </div>
-
-                        {{-- Attributes --}}
-                        {{-- <div class="col-lg-12">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <h4>Attributes</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="accordion mb-3" id="accordionExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header d-flex gap-3 align-items-center" id="headingOne">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne" aria-expanded="true"
-                                                    aria-controls="collapseOne">
-                                                    Attributes #1
-                                                </button>
-                                            </h2>
-                                            <div id="collapseOne" class="accordion-collapse collapse show"
-                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <div class="mb-4">
-                                                                <div class="input-upload mb-4">
-                                                                    <img src=" {{ asset('backend/assets/imgs/theme/upload.svg') }}"
-                                                                        alt="">
-                                                                    <input class="form-control" type="file"
-                                                                        name="product_image[]" multiple accept="image/*">
-                                                                    @error('product_image')
-                                                                        <div class="text-danger">{{ $message }}*</div>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-9">
-                                                            <div class="row">
-                                                                <div class="mb-4 col-12">
-                                                                    <label for="product_name"
-                                                                        class="form-label">SKU</label>
-                                                                    <input type="text" placeholder="Entire Name"
-                                                                        class="form-control @error('sku.0') is-invalid @enderror"
-                                                                        name="sku[]">
-                                                                </div>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="product_name"
-                                                                        class="form-label">Color</label>
-                                                                    <select name="color_id[]"
-                                                                        class="form-select @error('color_id.0') is-invalid @enderror"
-                                                                        id="">
-                                                                        <option value="">Select Color</option>
-                                                                        @forelse ($colors as $color)
-                                                                            <option value="{{ $color->id }}">
-                                                                                {{ $color->name }}</option>
-                                                                        @empty
-                                                                        @endforelse
-                                                                    </select>
-                                                                </div>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="product_name"
-                                                                        class="form-label">Size</label>
-                                                                    <select name="size_id[]" id=""
-                                                                        class="form-select @error('size_id.0') is-invalid @enderror">
-                                                                        <option value="">Select Size</option>
-                                                                        @forelse ($sizes as $size)
-                                                                            <option value="{{ $size->id }}">
-                                                                                {{ $size->name }}</option>
-                                                                        @empty
-                                                                        @endforelse
-                                                                    </select>
-                                                                </div>
-                                                                <hr>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="price" class="form-label">Price</label>
-                                                                    <input type="text" placeholder="Entire Name"
-                                                                        class="form-control @error('price.0') is-invalid @enderror"
-                                                                        name="price[]">
-                                                                </div>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="stock_price" class="form-label">Stock
-                                                                        Price</label>
-                                                                    <input type="number" placeholder="Entire Name"
-                                                                        class="form-control @error('stock_price.0') is-invalid @enderror"
-                                                                        name="stock_price[] ">
-                                                                </div>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="s_price" class="form-label">Discount
-                                                                        Price</label>
-                                                                    <input type="number" placeholder="Entire Name"
-                                                                        class="form-control @error('s_price.0') is-invalid @enderror"
-                                                                        name="s_price[]">
-                                                                </div>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="product_name"
-                                                                        class="form-label">Type</label>
-                                                                    <select name="sp_type[]" id=""
-                                                                        class="form-control @error('sp_type.0') is-invalid @enderror">
-                                                                        <option value="">Discount Type</option>
-                                                                        <option value="Fixed">Fixed</option>
-                                                                        <option value="Percentage">Percentage</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="mb-4 col-md-6">
-                                                                    <label for="qnt"
-                                                                        class="form-label">Quantity</label>
-                                                                    <input type="number" placeholder="0"
-                                                                        class="form-control @error('qnt.0') is-invalid @enderror"
-                                                                        name="qnt[]">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-primary" id="addVariant">Add
-                                        variant</button>
-                                </div>
-                            </div>
-                        </div> --}}
 
                         {{-- SEO --}}
                         <div class="col-12">
@@ -361,6 +250,11 @@
                                             <label class="form-check-label" for="checkPopular">Popular</label>
                                             <input class="form-check-input" name="popular" type="checkbox"
                                                 id="checkPopular">
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <label class="form-check-label" for="shipping_fee">Shipping free</label>
+                                            <input class="form-check-input" name="shipping_fee" type="checkbox"
+                                                id="shipping_fee">
                                         </div>
                                     </div>
                                 </div>

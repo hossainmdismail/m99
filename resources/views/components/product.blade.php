@@ -5,15 +5,15 @@
                 @if ($product->attributes && $product->attributes->first())
                     @foreach ($product->attributes->take(2) as $key => $image)
                         <img class="{{ $key + 1 == 1 ? 'default-img' : 'hover-img' }}"
-                            src="{{ asset('files/product/' . $image->image) }}" alt="">
+                            src="{{ asset('files/product/' . $image->image) }}" alt="{{ $product->name }}">
                     @endforeach
                 @else
-                    <img class="default-img" src="{{ asset('noAvatar.png') }}" alt="">
+                    <img class="default-img" src="{{ asset('noAvatar.png') }}" alt="{{ $product->name }}">
                 @endif
             </a>
         </div>
 
-        <div class="product-badges product-badges-position product-badges-mrg">
+        <div class="product-badges product-badges-position product-badges-mrg gap-1">
             @if ($product->featured == 1)
                 <span class="hot">
                     Featured
@@ -21,6 +21,11 @@
             @elseif ($product->popular == 1)
                 <span class="new">
                     Popular
+                </span>
+            @endif
+            @if ($product->shipping_fee == 1)
+                <span class="best">
+                    Shipping free
                 </span>
             @endif
         </div>
@@ -40,12 +45,6 @@
             </div>
             <span>({{ count($product->comments) }})</span>
         </div>
-        {{--
-        <div class="rating-result" title="100%">
-            <span>
-                <span>({{ count($product->comments) }})</span>
-            </span>
-        </div> --}}
         <div class="product-price">
             <span>৳ {{ number_format($product->getFinalPrice()) }}</span>
         </div>

@@ -33,7 +33,12 @@
                 </div>
             </div>
             <div class="col-lg-3 d-none d-sm-block">
-                @if ($header_one)
+                @foreach ($products as $product)
+                    <x-horizon :product="$product" />
+                @endforeach
+
+
+                {{-- @if ($header_one)
                     <div class="banner-img banner-1 wow fadeIn  animated home-3">
                         <img class="border-radius-10" src="{{ asset('files/campaign/' . $header_one->campaign_image) }}"
                             alt="">
@@ -57,7 +62,7 @@
                                     class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
-                @endif
+                @endif --}}
             </div>
         </div>
     </div>

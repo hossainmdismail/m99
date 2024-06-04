@@ -4,9 +4,8 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow">Home</a>
-                <span></span> Pages
-                <span></span> Account
+                <a href="{{ route('index') }}" rel="nofollow">Home</a>
+                <span></span> Profile
             </div>
         </div>
     </div>
@@ -92,10 +91,12 @@
                                                                 <td>{{ $ord->created_at->format('M d, Y') }}</td>
                                                                 <td>{{ ucfirst($ord->order_status) }}</td>
                                                                 <td>৳ {{ number_format($ord->price) }}</td>
-                                                                @if ($ord->order_status === 'pending')
-                                                                    <td><a href="#" class="btn-small d-block">View</a>
-                                                                    </td>
-                                                                @endif
+                                                                <td>
+                                                                    @if ($ord->order_status === 'pending')
+                                                                        <a href="{{ route('profile.order.edit', $ord->id) }}"
+                                                                            class="btn-small d-block">Update</a>
+                                                                    @endif
+                                                                </td>
                                                             </tr>
                                                         @empty
                                                         @endforelse

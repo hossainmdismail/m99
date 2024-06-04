@@ -4094,11 +4094,12 @@ table .product-thumbnail img {
 }
 
 .product-sidebar .image {
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
     float: left;
-    margin-right: 10px;
+    margin-right: 13px;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .shop-product-fillter {
@@ -7646,12 +7647,12 @@ span.fi-rs-apps {
     font-size: 14px;
 }
 
-.sidebar-widget.price_range,
+/* .sidebar-widget.price_range,
 .sidebar-widget.product-sidebar {
     border-radius: 0px;
     border: 1px solid #e2e9e1;
     padding: 30px;
-}
+} */
 
 .sidebar-widget .banner-img {
     float: none;

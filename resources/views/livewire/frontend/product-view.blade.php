@@ -70,16 +70,18 @@
             @error('size_id')
                 <span class="error text-danger" style="font-size: 12px">{{ $message }}</span>
             @enderror
-            <div class="attr-detail attr-size mb-15">
-                <strong class="mr-10">Size</strong>
-                <ul class="list-filter size-filter font-small">
-                    @foreach ($sizes as $attr)
-                        <li class="{{ $size_id == $attr->id ? 'active' : '' }}"><a
-                                wire:click="sizeAction({{ $attr->id }})">{{ $attr->name }}</a></li>
-                    @endforeach
-                    <li wire:loading wire:target="sizeByColor">...</li>
-                </ul>
-            </div>
+            @if (count($sizes) != 0)
+                <div class="attr-detail attr-size mb-15">
+                    <strong class="mr-10">Size</strong>
+                    <ul class="list-filter size-filter font-small">
+                        @foreach ($sizes as $attr)
+                            <li class="{{ $size_id == $attr->id ? 'active' : '' }}"><a
+                                    wire:click="sizeAction({{ $attr->id }})">{{ $attr->name }}</a></li>
+                        @endforeach
+                        <li wire:loading wire:target="sizeByColor">...</li>
+                    </ul>
+                </div>
+            @endif
             <div class="detail-extralink">
                 <div class="mb-3">
                     @error('quantity')
