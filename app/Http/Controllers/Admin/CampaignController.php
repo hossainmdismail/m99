@@ -33,24 +33,27 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'campaign_for'      => 'required|max:255',
             'campaign_name'     => 'required|max:255',
             'campaign_image'    => 'required',
-            'image_type'        => 'required',
+            's_price'           => 'required',
+            'sp_type'           => 'required',
         ]);
 
         $size = null;
 
-        if ($request->image_type == 'horizontal') {
-            Photo::upload($request->campaign_image, 'files/campaign', 'CAMP',[966,542]);
-        }elseif ($request->image_type == 'vertical') {
-            Photo::upload($request->campaign_image, 'files/campaign', 'CAMP',[600,712]);
-        }
+        // if ($request->image_type == 'horizontal') {
+        Photo::upload($request->campaign_image, 'files/campaign', 'CAMP', [966, 542]);
+        // } elseif ($request->image_type == 'vertical') {
+        //     Photo::upload($request->campaign_image, 'files/campaign', 'CAMP', [600, 712]);
+        // }
         Campaign::insert([
             'campaign_for'      => $request->campaign_for,
             'campaign_name'     => $request->campaign_name,
             'campaign_image'    => Photo::$name,
-            'image_type'        => $request->image_type,
-            'percentage'        => $request->percentage,
+            'type'              => 'campaign',
+            'sp_type'           => $request->sp_type,
+            's_price'           => $request->s_price,
             'start'             => $request->start,
             'end'               => $request->end,
             'created_at'        => Carbon::now(),
@@ -83,25 +86,26 @@ class CampaignController extends Controller
     {
         $request->validate([
             'campaign_name' => 'required|max:255',
+            'sp_type'       => 'required',
+            's_price'       => 'required',
         ]);
 
 
         $campaign = Campaign::find($id);
         $campaign->campaign_for     = $request->campaign_for;
         $campaign->campaign_name    = $request->campaign_name;
-        $campaign->percentage       = $request->percentage;
         $campaign->start            = $request->start;
         $campaign->end              = $request->end;
+        $campaign->sp_type          = $request->sp_type;
+        $campaign->s_price          = $request->s_price;
 
         if ($request->campaign_image) {
             $request->validate([
                 'campaign_image'    => 'required',
-                'image_type'        => 'required',
             ]);
 
-            Photo::delete('files/campaign',$campaign->campaign_image);
+            Photo::delete('files/campaign', $campaign->campaign_image);
             Photo::upload($request->campaign_image, 'files/campaign', 'CAMP');
-            $campaign->image_type  = $request->image_type;
             $campaign->campaign_image  = Photo::$name;
         }
 
@@ -113,7 +117,7 @@ class CampaignController extends Controller
     {
         $campaign = Campaign::find($id);
         if ($campaign->campaign_image) {
-            Photo::delete('files/campaign',$campaign->campaign_image);
+            Photo::delete('files/campaign', $campaign->campaign_image);
         }
         $campaign->delete();
         return back();

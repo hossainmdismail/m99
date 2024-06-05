@@ -14,7 +14,8 @@ class Shop extends Component
 
     public $paginateCount;
 
-    public function pageFilter($count){
+    public function pageFilter($count)
+    {
         $this->paginateCount = $count;
     }
 
@@ -23,16 +24,16 @@ class Shop extends Component
         $category = ProductCategory::all(); //Getting Category
         $featured   = Product::where('featured', 1)->latest()->get()->take(4);
         // $cate = ProductCategory::select('id','slugs')->where('slugs',$this->slugs)->first(); //Getting Category ID
-        $ads = Campaign::where('image_type','horizontal')->first();
+        // $ads = Campaign::where('image_type','horizontal')->first();
 
         $product = Product::query();
-        $products = $product->latest()->paginate($this->paginateCount != null ? $this->paginateCount:10);
+        $products = $product->latest()->paginate($this->paginateCount != null ? $this->paginateCount : 10);
 
-        return view('livewire.frontend.shop',[
+        return view('livewire.frontend.shop', [
             'products'      => $products,
             'categories'    => $category,
             'featured'      => $featured,
-            'horizontal'    => $ads,
+            // 'horizontal'    => $ads,
         ]);
     }
 }

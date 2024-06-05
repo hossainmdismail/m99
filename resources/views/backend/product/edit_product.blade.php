@@ -4,7 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
 @section('content')
-    <!-- Modal Color add -->
+    <!-- Att add -->
     <div class="modal fade show" id="attr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <!-- Modal Color add -->
+    <!-- Update -->
     <div class="modal fade show" id="editForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -91,11 +91,11 @@
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
                                     name="image">
                             </div>
-                            <div class="mb-4 col-12">
+                            {{-- <div class="mb-4 col-12">
                                 <label for="product_name" class="form-label">SKU</label>
                                 <input type="text" placeholder="Entire Name"
                                     class="form-control @error('sku') is-invalid @enderror" name="sku" disabled>
-                            </div>
+                            </div> --}}
                             <div class="mb-4 col-md-6">
                                 <label for="product_name" class="form-label">Color</label>
                                 <select name="color_id" class="form-select @error('color_id') is-invalid @enderror"
@@ -215,7 +215,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-4">
-                                                    <label for="product_name" class="form-label">Product Name </label>
+                                                    <label for="product_name" class="form-label">Product Name</label>
                                                     <input type="text" placeholder="Entire Name" class="form-control"
                                                         name="product_name" value="{{ $request->name }}">
                                                 </div>

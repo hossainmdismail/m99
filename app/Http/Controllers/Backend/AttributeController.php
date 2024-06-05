@@ -98,7 +98,7 @@ class AttributeController extends Controller
         $request->validate([
             'id'            => 'required|integer',
             'color_id'      => 'required|integer',
-            'size_id'       => 'required|integer',
+            // 'size_id'       => 'required|integer',
         ]);
 
         $attributes = Inventory::find($inventory);

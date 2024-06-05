@@ -100,7 +100,7 @@
                             No Data Found
                         @endforelse
                     </div>
-                    @if ($horizontal)
+                    {{-- @if ($horizontal)
                         <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
 
                             <img src="{{ asset('files/campaign/' . $horizontal->campaign_image) }}" alt="">
@@ -110,7 +110,7 @@
                                 <a href="#">Shop Now <i class="fi-rs-arrow-right"></i></a>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>

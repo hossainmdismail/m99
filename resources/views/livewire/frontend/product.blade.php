@@ -91,7 +91,7 @@
     </div>
 
     {{-- ads --}}
-    @if ($ads)
+    {{-- @if ($ads)
         <section class="bg-grey-9 section-padding">
             <div class="container pt-15 pb-25">
                 <div class="heading-tab d-flex">
@@ -180,5 +180,5 @@
             </div>
         </section>
     @else
-    @endif
+    @endif --}}
 </section>
