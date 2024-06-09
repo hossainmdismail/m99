@@ -22,12 +22,6 @@
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
                                     name="image" value="{{ old('image') }}">
                             </div>
-                            {{-- <div class="mb-4 col-12">
-                                <label for="product_name" class="form-label">SKU</label>
-                                <input type="text" placeholder="Entire Name"
-                                    class="form-control @error('sku') is-invalid @enderror" name="sku"
-                                    value="{{ old('sku') }}">
-                            </div> --}}
                             <div class="mb-4 col-md-6">
                                 <label for="product_name" class="form-label">Color</label>
                                 <select name="color_id" class="form-select @error('color_id') is-invalid @enderror"
@@ -91,11 +85,6 @@
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
                                     name="image">
                             </div>
-                            {{-- <div class="mb-4 col-12">
-                                <label for="product_name" class="form-label">SKU</label>
-                                <input type="text" placeholder="Entire Name"
-                                    class="form-control @error('sku') is-invalid @enderror" name="sku" disabled>
-                            </div> --}}
                             <div class="mb-4 col-md-6">
                                 <label for="product_name" class="form-label">Color</label>
                                 <select name="color_id" class="form-select @error('color_id') is-invalid @enderror"
@@ -122,17 +111,17 @@
                             </div>
                             <hr>
                             <div class="mb-4 col-md-6">
-                                <label for="avlqnt" class="form-label">Available</label>
+                                <label for="avlqnt" class="form-label">Available Quantity</label>
                                 <input type="number" placeholder="0"
                                     class="form-control @error('avlqnt') is-invalid @enderror" name="avlqnt"
-                                    value="{{ old('avlqnt') }}" disabled>
+                                    value="{{ old('avlqnt') }}">
                             </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="qnt" class="form-label">Quantity</label>
+                            {{-- <div class="mb-4 col-md-6">
+                                <label for="qnt" class="form-label">Add Quantity</label>
                                 <input type="number" placeholder="0"
                                     class="form-control @error('qnt') is-invalid @enderror" name="qnt"
                                     value="{{ old('qnt') }}">
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="modal-footer">

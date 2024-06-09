@@ -4447,9 +4447,9 @@ table .product-thumbnail img {
 
 .color-filter.list-filter a span {
     display: block;
-    width: 28px;
-    height: 28px;
-    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -4698,7 +4698,8 @@ button.action-btn.hover-up {
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
+    /* align-items: center; */
+    flex-direction: column;
 }
 
 .product-detail-rating {

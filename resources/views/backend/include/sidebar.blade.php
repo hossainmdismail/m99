@@ -19,12 +19,13 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a class="menu-link" href="{{ route('admin.order') }}"> <i class="icon material-icons md-add_box"></i>
+                <a class="menu-link" href="{{ route('admin.order') }}"> <i
+                        class="icon material-icons md-shopping_cart"></i>
                     <span class="text">Order</span>
                 </a>
             </li>
             <li class="menu-item has-submenu">
-                <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_bag"></i>
                     <span class="text">product</span>
                 </a>
                 <div class="submenu">
@@ -34,7 +35,7 @@
                 </div>
             </li>
             <li class="menu-item has-submenu">
-                <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_cart"></i>
+                <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
                     <span class="text">Banner</span>
                 </a>
                 <div class="submenu">
@@ -43,7 +44,7 @@
                 </div>
             </li>
             <li class="menu-item has-submenu">
-                <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_bag"></i>
+                <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
                     <span class="text">Category</span>
                 </a>
                 <div class="submenu">
@@ -52,7 +53,7 @@
                 </div>
             </li>
             <li class="menu-item has-submenu">
-                <a class="menu-link" href="#"> <i class="icon material-icons md-store"></i>
+                <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
                     <span class="text">Campaign</span>
                 </a>
                 <div class="submenu">
@@ -70,7 +71,7 @@
                 </div>
             </li>
             <li class="menu-item has-submenu">
-                <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                <a class="menu-link" href="#"> <i class="icon material-icons md-monetization_on"></i>
                     <span class="text">Coupon</span>
                 </a>
                 <div class="submenu">
@@ -80,19 +81,19 @@
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="{{ route('shipping.index') }}"> <i
-                        class="icon material-icons md-add_box"></i>
+                        class="icon material-icons md-local_offer"></i>
                     <span class="text">Shipping</span>
                 </a>
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="{{ route('employee.index') }}"> <i
-                        class="icon material-icons md-add_box"></i>
+                        class="icon material-icons md-person"></i>
                     <span class="text">Employee</span>
                 </a>
             </li>
             @if (Auth::guard('admin')->user()->role == 'superAdmin')
                 <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-add_box"></i>
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
                         <span class="text">Configuration</span>
                     </a>
                     <div class="submenu">

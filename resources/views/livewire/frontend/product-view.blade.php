@@ -1,3 +1,6 @@
+@php
+    $colorName = null;
+@endphp
 <div class="col-md-8 col-sm-12 col-xs-12">
     <div class="detail-info">
         <h2 class="title-detail">{{ $product->name }}</h2>
@@ -54,15 +57,17 @@
                 <span class="error text-danger" style="font-size: 12px">{{ $message }}</span>
             @enderror
             <div class="attr-detail attr-color mb-15">
-                <strong class="mr-10">Color</strong>
+                <strong class="mr-10">Color{{ $color_name ? ' - ' . $color_name : '' }}</strong>
                 <ul class="list-filter color-filter">
                     @foreach ($product->uniqueAttributes() as $color)
-                        <li class="{{ $color_id == $color->color_id ? 'active' : '' }}"><a
-                                wire:click="sizeByColor({{ $color->color_id }})" data-color="black"><span
-                                    class="product-color-red active" style="background: {{ $color->color->code }}">
+                        <li class="{{ $color_id == $color->color_id ? 'active' : '' }}">
+                            <a wire:click="sizeByColor({{ $color->color_id }})" data-color="black">
+                                <span class="product-color-red active" style="background: {{ $color->color->code }}">
                                     <img src="{{ asset('files/product/' . $color->image) }}"
                                         alt="{{ $color->image }}">
-                                </span></a></li>
+                                </span>
+                            </a>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -99,7 +104,7 @@
                 </d>
 
                 <ul class="product-meta font-xs color-grey mt-50">
-                    <li>SKU :<span class="in-stock text-black ml-5">{{ $sku }}</span></li>
+                    <li>SKU :<span class="in-stock text-black ml-5">{{ $product->sku }}</span></li>
                     <li>Availability :
                         @if ($stock == 0)
                             <span

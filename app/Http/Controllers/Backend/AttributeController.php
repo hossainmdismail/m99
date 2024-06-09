@@ -50,6 +50,7 @@ class AttributeController extends Controller
             $inventory->color_id    = $request->color_id;
             $inventory->size_id     = $request->size_id;
             $inventory->qnt         = $request->qnt;
+            $inventory->total_qnt   = $request->qnt;
 
             //Upload Photo
             Photo::upload($request->image, 'files/product', 'PRO' . $request->id, [400, 400]);
@@ -104,10 +105,11 @@ class AttributeController extends Controller
         $attributes = Inventory::find($inventory);
         if ($attributes) {
             $attributes->color_id = $request->color_id;
-            $attributes->size_id = $request->size_id;
-            if ($request->qnt) {
-                $attributes->qnt = $attributes->qnt + $request->qnt;
-            }
+            $attributes->size_id  = $request->size_id;
+            $attributes->qnt      = $request->avlqnt;
+            // if ($request->qnt) {
+            //     $attributes->qnt = $attributes->qnt + $request->qnt;
+            // }
             if ($request->has('image')) {
                 //Delete Image
                 Photo::delete('files/product', $attributes->image);

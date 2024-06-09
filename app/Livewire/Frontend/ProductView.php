@@ -5,10 +5,11 @@ namespace App\Livewire\Frontend;
 use App\Models\Product;
 use Livewire\Component;
 use App\Helpers\CookieSD;
+use App\Models\Color;
 
 class ProductView extends Component
 {
-    public $id, $btn, $product, $sizes = [], $quantity = 1, $color_id, $size_id, $sku, $stock = 0;
+    public $id, $btn, $product, $sizes = [], $quantity = 1, $color_id, $size_id, $color_name, $stock = 0;
 
     protected $rules = [
         'quantity'  => 'required|numeric|min:1|max:100', // Example: min value is 1 and max value is 100
@@ -43,7 +44,7 @@ class ProductView extends Component
         $this->product = Product::find($this->id);
         $data = $this->product->attributes()->first();
         if ($data) {
-            $this->sku = $data->sku;
+            // $this->sku = $data->sku;
         }
     }
 
@@ -51,11 +52,15 @@ class ProductView extends Component
     public function sizeByColor($id)
     {
         $this->color_id = $id;
+        $colorNewName = Color::find($id);
+        if ($colorNewName) {
+            $this->color_name = $colorNewName->name;
+        }
         $size = $this->product->getSizesByColor($id);
         $this->sizes = $size;
         $this->size_id = null;
         $data = $this->product->attributes()->first();
-        $this->sku = $data->sku;
+        // $this->sku = $data->sku;
         $this->stock = 0;
     }
 
@@ -64,7 +69,7 @@ class ProductView extends Component
         $this->size_id = $id;
         $data = $this->product->attributes()->where('color_id', $this->color_id)->where('size_id', $id)->first();
         if ($data) {
-            $this->sku = $data->sku;
+            // $this->sku = $data->sku;
             $this->stock = $data->qnt;
         }
     }
