@@ -119,12 +119,12 @@
                             </option>
                         </select>
                         <button type="submit" class="btn btn-primary" name="btn" value="1">Save</button>
-                        <button class="btn btn-secondary print ms-2" name="btn" value="2"><i
+                        <button class="btn btn-secondary print ms-2" name="btn" value="2" id="printButton"><i
                                 class="icon material-icons md-print"></i></button>
                     </div>
                 </div>
             </header> <!-- card-header end// -->
-            <div class="card-body">
+            <div class="card-body" id="sk_print">
                 <div class="row mb-50 mt-20 order-info-wrap">
                     <div class="col-md-4">
                         <article class="icontext align-items-start">
@@ -199,8 +199,9 @@
                                             <td>
                                                 <a class="itemside" href="#">
                                                     {{-- <div class="left">
-                                                    <img src="assets/imgs/items/1.jpg" width="40" height="40" class="img-xs" alt="Item">
-                                                </div> --}}
+                                                        <img src="{{ asset('files/product',) }}" width="40" height="40"
+                                                            class="img-xs" alt="Item">
+                                                    </div> --}}
                                                     <div class="info">
                                                         @if ($product->product)
                                                             {{ $product->product->product->name }}
@@ -291,4 +292,21 @@
             </div> <!-- card-body end// -->
         </div> <!-- card end// -->
     </form> <!-- content-main end// -->
+@endsection
+
+
+@section('script')
+    <script>
+        let invoiceBody = document.getElementById('sk_print').innerHTML;
+        var printWindow = window.open('', '', 'height=600,width=800');
+        // Write the contents to the new window
+        printWindow.document.write('<html><head><title>Print Div</title>');
+        // Include any necessary styles
+        printWindow.document.write('<link rel="stylesheet" type="text/css" href="styles.css">');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(divContents);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    </script>
 @endsection

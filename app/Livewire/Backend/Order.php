@@ -61,15 +61,14 @@ class Order extends Component
     public function render()
     {
         $query = ModelsOrder::query()
-                ->where(function ($query) {
-                    $query->where('order_id', 'like', '%' . $this->search . '%')
+            ->where(function ($query) {
+                $query->where('order_id', 'like', '%' . $this->search . '%')
                     ->orWhere('name', 'like', '%' . $this->search . '%')
                     ->orWhere('number', 'like', '%' . $this->search . '%');
-                })
-                ->when($this->date, function ($query) {
-                    $query->whereDate('created_at', '>=', $this->date);
-                })
-                ;
+            })
+            ->when($this->date, function ($query) {
+                $query->whereDate('created_at', '>=', $this->date);
+            });
 
         if ($this->status != '') {
             $query->where('order_status', $this->status);
@@ -80,7 +79,7 @@ class Order extends Component
         // }
 
         $order = $query->orderBy('id', 'DESC')->paginate(10);
-        return view('livewire.backend.order',[
+        return view('livewire.backend.order', [
             'orders' => $order
         ]);
     }
