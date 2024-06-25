@@ -36,6 +36,7 @@ class CampaignController extends Controller
             'campaign_for'      => 'required|max:255',
             'campaign_name'     => 'required|max:255',
             'campaign_image'    => 'required',
+            'target'            => 'required',
             's_price'           => 'required',
             'sp_type'           => 'required',
         ]);
@@ -52,6 +53,7 @@ class CampaignController extends Controller
             'campaign_name'     => $request->campaign_name,
             'campaign_image'    => Photo::$name,
             'type'              => 'campaign',
+            'target'           => $request->target,
             'sp_type'           => $request->sp_type,
             's_price'           => $request->s_price,
             'start'             => $request->start,
@@ -87,6 +89,7 @@ class CampaignController extends Controller
         $request->validate([
             'campaign_name' => 'required|max:255',
             'sp_type'       => 'required',
+            'target'        => 'required',
             's_price'       => 'required',
         ]);
 
@@ -95,6 +98,7 @@ class CampaignController extends Controller
         $campaign->campaign_for     = $request->campaign_for;
         $campaign->campaign_name    = $request->campaign_name;
         $campaign->start            = $request->start;
+        $campaign->target           = $request->target;
         $campaign->end              = $request->end;
         $campaign->sp_type          = $request->sp_type;
         $campaign->s_price          = $request->s_price;

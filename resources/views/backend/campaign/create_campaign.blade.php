@@ -55,13 +55,13 @@
                                         <input type="file" class="form-control" name="campaign_image">
                                     </div>
                                 </div>
-                                {{-- <div class="col-lg-6 mb-4">
+                                <div class="col-lg-4 mb-4">
                                     <div class="mb-4">
-                                        <label for="product_name" class="form-label">Coupon</label>
-                                        <input type="text" placeholder="Coupon" class="form-control" name="coupon">
+                                        <label for="product_name" class="form-label">Target price</label>
+                                        <input type="number" placeholder="0.00" class="form-control" name="target">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                {{-- <div class="col-lg-6">
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label">Type</label>
                                         <select class="form-select" name="type" id="">
@@ -71,13 +71,13 @@
                                         </select>
                                     </div>
                                 </div> --}}
-                                <div class="col-lg-6 mb-4">
+                                <div class="col-lg-4 mb-4">
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label">Discount</label>
                                         <input type="number" placeholder="10%" class="form-control" name="s_price">
                                     </div>
                                 </div>
-                                <div class="col-lg-6 mb-4">
+                                <div class="col-lg-4 mb-4">
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label">Discount Type</label>
                                         <select class="form-select" name="sp_type" id="">
@@ -87,7 +87,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label"></label>
                                         <button type="submit"

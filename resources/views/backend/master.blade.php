@@ -39,7 +39,7 @@ $config = Config::first();
     <main class="main-wrap">
         @include('backend.include.header')
         @yield('content')
-        <footer class="main-footer font-xs">
+        {{-- <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
                 <div class="col-sm-6">
                     <script>
@@ -52,7 +52,7 @@ $config = Config::first();
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> --}}
     </main>
 
     <script src="{{ asset('backend') }}/assets/js/vendors/select2.min.js"></script>

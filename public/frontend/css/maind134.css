@@ -1116,6 +1116,17 @@ button[type='submit']:hover {
     float: left;
 }
 
+/* Socail button */
+
+#socail {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 99999;
+}
+
+
 /*COMPONENTS -> FORM*/
 input:-moz-placeholder,
 textarea:-moz-placeholder {

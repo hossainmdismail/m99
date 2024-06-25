@@ -6,6 +6,7 @@ use App\Models\Order;
 use Livewire\Component;
 use App\Models\Shipping;
 use App\Helpers\CookieSD;
+use App\Models\Campaign;
 use App\Models\Inventory;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -21,6 +22,8 @@ class Checkout extends Component
     public $shipping_id = null;
     public $message = null;
     public $shipping_fee = null;
+    public $discount = null;
+    public $total = 0;
 
     #[Validate('required')]
     public $shippingPrice = null;
@@ -160,16 +163,26 @@ class Checkout extends Component
         $this->name = Auth::check() ? Auth::user()->name : '';
         $this->email = Auth::check() ? Auth::user()->email : '';
         $this->number = Auth::check() ? Auth::user()->number : '';
+        $camp = Campaign::get();
+        //dd($camp);
+        // foreach ($camp as $value) {
+        //     if ($this->total >= $value) {
+        //         # code...
+        //     }
+        // }
     }
 
     public function render()
     {
         $product = CookieSD::data();
         $shipping = Shipping::all();
+
+        $this->total = $product['price'] + $this->shippingPrice;
+
         return view('livewire.frontend.checkout', [
             'products'  => $product,
             'shippings' => $shipping,
-            'total'     => $product['price'] + $this->shippingPrice,
+            // 'total'     => $product['price'] + $this->shippingPrice,
         ]);
     }
 }

@@ -54,8 +54,6 @@
             </div>
         @endif
 
-
-
         <div class="row">
             <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

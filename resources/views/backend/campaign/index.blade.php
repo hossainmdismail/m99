@@ -26,6 +26,7 @@
                                 <th scope="col">Campaign For</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Target price</th>
                                 <th scope="col">Discount</th>
                                 <th scope="col">Start</th>
                                 <th scope="col">End</th>
@@ -41,9 +42,10 @@
                                             src="{{ asset('files/campaign/' . $request->campaign_image) }}" alt="">
                                     </td>
                                     <td><b>{{ $request->campaign_name }}</b></td>
+                                    <td><b>{{ $request->target }}</b></td>
                                     <td><b>{{ $request->s_price }} {{ $request->sp_type == 'Percent' ? '%' : '' }}</b></td>
-                                    <td><b>{{ $request->start }}</b></td>
-                                    <td><b>{{ $request->end }}</b></td>
+                                    <td><b>{{ $request->getStart() }}</b></td>
+                                    <td><b>{{ $request->getEnd() }}</b></td>
                                     <form action="{{ route('campaign.destroy', $request->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')

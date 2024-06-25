@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('campaign_for');
             $table->string('campaign_name');
             $table->string('campaign_image');
+            $table->bigInteger('target');
             $table->bigInteger('s_price');
             $table->string('sp_type');
             $table->string('coupon')->nullable();

@@ -20,21 +20,25 @@ class AdminOrder extends Controller
 
     public function orderView($id)
     {
+        $config = Config::first();
         $order = Order::find($id);
         $order->notification = 0;
         $order->save();
 
         // dd($order->products);
         return view('backend.order.view', [
-            'order' => $order
+            'order'  => $order,
+            'config' => $config,
         ]);
     }
 
     public function orderViewModify(Request $request)
     {
+        //dd($request->all());
         $request->validate([
-            'btn'   => 'required',
-            'id'    => 'required'
+            'btn'       => 'required',
+            'id'        => 'required',
+            'status'    => 'required'
         ]);
 
         $order = Order::find($request->id);
@@ -43,21 +47,25 @@ class AdminOrder extends Controller
         if ($config) {
             $image = asset('files/config/' . $config->logo);
         }
+        $order->order_status    = $request->status;
+        $order->admin_message   = $request->notes;
+        $order->save();
+        return back()->with('succ', 'updated');
 
-        if ($request->btn == 1 && $request->status != null && $order) {
-            $order->order_status    = $request->status;
-            $order->admin_message   = $request->note;
-            $order->save();
-            return back()->with('succ', 'updated');
-        } elseif ($request->btn == 2 && $order) {
-            $data = [
-                'data' => $order,
-                'logo' => $image,
-            ];
-            $pdf = Pdf::loadView('pdf.invoice', $data);
-            return $pdf->download('invoice.pdf');
-        }
-        return back();
+        // if ($request->btn == 1 && $request->status != null && $order) {
+        //     $order->order_status    = $request->status;
+        //     $order->admin_message   = $request->notes;
+        //     $order->save();
+        //     return back()->with('succ', 'updated');
+        // } elseif ($request->btn == 2 && $order) {
+        //     $data = [
+        //         'data' => $order,
+        //         'logo' => $image,
+        //     ];
+        //     $pdf = Pdf::loadView('pdf.invoice', $data);
+        //     return $pdf->download('invoice.pdf');
+        // }
+        // return back();
     }
 
     public function csvDownload(Request $request)
