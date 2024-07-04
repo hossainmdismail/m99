@@ -418,6 +418,8 @@
                                     </table>
                                 </div>
                             </div>
+
+                            @livewire('backend.product-image', ['product_id' => $request->id])
                         </div>
                     </div>
                 </div>

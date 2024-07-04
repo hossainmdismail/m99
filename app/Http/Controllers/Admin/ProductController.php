@@ -13,6 +13,9 @@ use Illuminate\Support\Carbon;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Livewire\Backend\ProductImage;
+use App\Models\ProductPhoto;
+use Photo;
 
 class ProductController extends Controller
 {
@@ -50,7 +53,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'btn'               => 'required',
             'category_id'       => 'required|integer',
@@ -65,8 +67,6 @@ class ProductController extends Controller
             's_price'           => 'required|integer',
             'sp_type'           => 'required',
         ]);
-
-
 
         $slug = Str::slug($request->product_name);
 
@@ -113,7 +113,19 @@ class ProductController extends Controller
                         'created_at' => Carbon::now(),
                     ]);
                 }
+
+                if ($request->has('images')) {
+                    foreach ($request->images as  $image) {
+                        Photo::upload($image, 'files/product',  $product_id . 'PRON', [1100, 1100]);
+                        ProductPhoto::insert([
+                            'product_id'    => $product_id,
+                            'image'         => Photo::$name,
+                        ]);
+                    }
+                }
             }
+
+
 
             DB::commit();
             return redirect()->route('product.edit', $product_id)->with('succ', 'Product added successfully, now you can add product attributes');

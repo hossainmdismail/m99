@@ -7,7 +7,7 @@
             <div class="row mb-4">
                 @if ($images)
                     @foreach ($images as $image)
-                        <div class="col-6 position-relative">
+                        <div class="col-4 position-relative">
                             <a wire:click="imageDelete({{ $image->id }})" class="position-absolute"
                                 style="padding-left: 0.4rem">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"

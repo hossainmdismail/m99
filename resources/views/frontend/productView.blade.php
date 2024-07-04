@@ -67,6 +67,13 @@
                                                         alt="product image" width="100%">
                                                 </figure>
                                             @endforeach
+                                            @if ($product->images)
+                                                @foreach ($product->images as $key => $image)
+                                                    <img class="{{ $key + 1 == 1 ? 'default-img' : 'hover-img' }}"
+                                                        src="{{ asset('files/product/' . $image->image) }}"
+                                                        alt="{{ $product->name }}">
+                                                @endforeach
+                                            @endif
                                         </div>
                                         <!-- THUMBNAILS -->
                                         <div class="slider-nav-thumbnails pl-15 pr-15">
@@ -74,6 +81,13 @@
                                                 <div><img src="{{ asset('files/product/' . $image->image) }}"
                                                         alt="product image"></div>
                                             @endforeach
+                                            @if ($product->images)
+                                                @foreach ($product->images as $key => $image)
+                                                    <img class="{{ $key + 1 == 1 ? 'default-img' : 'hover-img' }}"
+                                                        src="{{ asset('files/product/' . $image->image) }}"
+                                                        alt="{{ $product->name }}">
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
