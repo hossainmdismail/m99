@@ -1,32 +1,44 @@
 <div class="product-cart-wrap mb-30">
     <div class="product-img-action-wrap">
+        <span class="oos"></span>
         <div class="product-img product-img-zoom">
             <a href="{{ route('product.view', $product->slugs) }}">
+                @if ($product->images)
+                    @foreach ($product->images as $key => $image)
+                        <img class="{{ $key + 1 == 1 ? 'default-img' : 'hover-img' }}"
+                            src="{{ asset('files/product/' . $image->image) }}" alt="{{ $product->name }}">
+                    @endforeach
+                @endif
                 @if ($product->attributes && $product->attributes->first())
                     @foreach ($product->attributes->take(2) as $key => $image)
                         <img class="{{ $key + 1 == 1 ? 'default-img' : 'hover-img' }}"
                             src="{{ asset('files/product/' . $image->image) }}" alt="{{ $product->name }}">
                     @endforeach
-                @else
-                    <img class="default-img" src="{{ asset('noAvatar.png') }}" alt="{{ $product->name }}">
                 @endif
             </a>
         </div>
 
+
         <div class="product-badges product-badges-position product-badges-mrg gap-1">
-            @if ($product->featured == 1)
+            @if ($product->stock() == 0)
                 <span class="hot">
-                    Featured
+                    Stock out
                 </span>
-            @elseif ($product->popular == 1)
-                <span class="new">
-                    Popular
-                </span>
-            @endif
-            @if ($product->shipping_fee == 1)
-                <span class="best">
-                    Shipping free
-                </span>
+            @else
+                @if ($product->featured == 1)
+                    <span class="sale">
+                        Featured
+                    </span>
+                @elseif ($product->popular == 1)
+                    <span class="new">
+                        Popular
+                    </span>
+                @endif
+                @if ($product->shipping_fee == 1)
+                    <span class="best">
+                        Shipping free
+                    </span>
+                @endif
             @endif
         </div>
     </div>
@@ -47,6 +59,7 @@
         </div>
         <div class="product-price">
             <span>৳ {{ number_format($product->getFinalPrice()) }}</span>
+            <span class="old-price">৳ {{ number_format($product->price, 0) }}</span>
         </div>
 
         <div class="product-action-1 show">

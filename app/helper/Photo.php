@@ -1,6 +1,7 @@
 <?php
 
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class Photo
 {
@@ -11,6 +12,10 @@ class Photo
     //Pure File //Path Name // Prefix for name // size alternative
     public static function upload($file, $path, $prefix, $size = [])
     {
+        if (!File::exists(public_path($path))) {
+            // Create the directory
+            File::makeDirectory(public_path($path), 0755, true, true);
+        }
         if (file_exists(public_path($path))) {
             try {
                 $extention = $file->getClientOriginalExtension();

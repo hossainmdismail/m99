@@ -8,6 +8,7 @@ use App\Models\Campaign;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Photo;
@@ -21,16 +22,22 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $product = Product::all();
+        $order = Order::count();
+
+        $pendingOrder = Order::where('order_status', 'pending')->orderBy('id', 'DESC')->get();
+
+        $totalProduct = Product::count();
+        $totalSale = Order::where('order_status', 'delieverd')->sum('price');
         $cat = ProductCategory::all()->count();
-        $order = Order::all()->count();
         $camp = Campaign::all()->count();
-        return view('backend.home.home',[
-            'total_product' => $product->count(),
-            'total_price'   => $product->sum('price'),
+        return view('backend.home.home', [
+            'total_product' => $totalProduct,
+            'total_price'   => $totalSale,
+            'order_pending' => $pendingOrder,
             'total_cat'     => $cat,
             'order'         => $order,
             'camp'          => $camp,
+            'chart'         => $this->chart()
         ]);
     }
     function admin_login()
@@ -64,7 +71,7 @@ class AdminController extends Controller
 
         if ($super_admin == 0 && !Auth::guard('admin')->check()) {
             return view('backend.include.admin_register', compact('super_admin'));
-        }else {
+        } else {
             return redirect('/');
         }
     }
@@ -118,7 +125,8 @@ class AdminController extends Controller
         return back();
     }
 
-    function admin_logout(Request $request){
+    function admin_logout(Request $request)
+    {
         Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
@@ -126,5 +134,73 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function chart()
+    {
+        // Get data for the last 30 days grouped by day and status
+        $dailyData = Order::selectRaw('DATE(created_at) as date, order_status, COUNT(*) as total')
+            ->whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])
+            ->groupBy('date', 'order_status')
+            ->orderBy('date')
+            ->get();
+
+        // Initialize arrays
+        $labels = [];
+        $dataByDate = [];
+
+        // Prepare the structure to store data
+        foreach ($dailyData as $data) {
+            $dateLabel = Carbon::parse($data->date)->format('Y-m-d');
+
+            // Add date to labels if it's not already there
+            if (!in_array($dateLabel, $labels)) {
+                $labels[] = $dateLabel;
+            }
+
+            // Initialize the array if not already set
+            if (!isset($dataByDate[$dateLabel])) {
+                $dataByDate[$dateLabel] = [
+                    'delivered' => 0,
+                    'damage' => 0,
+                    'cancel' => 0,
+                ];
+            }
+
+            // Assign the counts to the correct status
+            switch ($data->order_status) {
+                case 'delieverd':
+                    $dataByDate[$dateLabel]['delivered'] = $data->total;
+                    break;
+                case 'damage':
+                    $dataByDate[$dateLabel]['damage'] = $data->total;
+                    break;
+                case 'cancel':
+                    $dataByDate[$dateLabel]['cancel'] = $data->total;
+                    break;
+            }
+        }
+
+        // Now we need to build the data arrays for each status
+        $deliveredData = [];
+        $damageData = [];
+        $cancelData = [];
+
+        foreach ($labels as $date) {
+            $deliveredData[] = $dataByDate[$date]['delivered'];
+            $damageData[] = $dataByDate[$date]['damage'];
+            $cancelData[] = $dataByDate[$date]['cancel'];
+        }
+
+        // Prepare the final chart data
+        $chartData = [
+            'labels' => $labels,
+            'datasets' => [
+                'delivered' => $deliveredData,
+                'damage' => $damageData,
+                'cancel' => $cancelData,
+            ],
+        ];
+        return $chartData;
     }
 }

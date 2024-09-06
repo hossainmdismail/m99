@@ -3569,8 +3569,8 @@ table .product-thumbnail img {
     top: 50%;
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    opacity: 0;
-    visibility: hidden;
+    opacity: 100;
+    visibility: visible;
     -webkit-transition: all .3s ease 0s;
     transition: all .3s ease 0s;
     z-index: 9;
@@ -3652,7 +3652,7 @@ table .product-thumbnail img {
     transition-delay: .1s;
     transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24), -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);
     opacity: 0;
-    visibility: hidden;
+    visibility: visible;
 }
 
 .product-cart-wrap .product-action-1 button:last-child,
@@ -4458,8 +4458,8 @@ table .product-thumbnail img {
 
 .color-filter.list-filter a span {
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
     border-radius: 10px;
     overflow: hidden;
 }

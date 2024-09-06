@@ -57,7 +57,7 @@ $config = Config::first();
 
     <script src="{{ asset('backend') }}/assets/js/vendors/select2.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/vendors/perfect-scrollbar.js"></script>
-    {{-- <script src="{{ asset('backend') }}/assets/js/vendors/jquery.fullscreen.min.js"></script> --}}
+    <script src="{{ asset('backend') }}/assets/js/vendors/jquery.fullscreen.min.js"></script>
     <script src="{{ asset('backend') }}/assets/js/vendors/chart.js"></script>
 
     {{-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -66,7 +66,8 @@ $config = Config::first();
 
     <!-- Main Script -->
     <script src="{{ asset('backend') }}/assets/js/main.js" type="text/javascript"></script>
-    <script src="{{ asset('backend') }}/assets/js/custom-chart.js" type="text/javascript"></script>
+    {{-- <script src="{{ asset('backend') }}/assets/js/custom-chart.js" type="text/javascript"></script>
+     --}}
     @yield('script')
     @livewireScripts
 </body>
