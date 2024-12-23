@@ -31,7 +31,8 @@ $link = CustomLink::first();
     {{-- social --}}
     <div id="socail" class="socail">
         <a href="">
-            <img src="{{ asset('frontend/imgs/socail/whatsapp.svg') }}" width="50px" height="50px" alt="">
+            <img src="{{ asset('frontend/imgs/socail/whatsapp.svg') }}" loading="lazy" width="50px" height="50px"
+                alt="">
         </a>
     </div>
 

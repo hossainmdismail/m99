@@ -15,6 +15,7 @@
                         class="text-muted material-icons md-post_add"></i>Site Map</a>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-3">
                 <div class="card card-body mb-4">
@@ -74,6 +75,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-xl-8 col-lg-12">
                 <div class="card mb-4">
@@ -125,6 +127,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
     </section> <!-- content-main end// -->
 @endsection
@@ -135,10 +138,7 @@
         if ($('#myChart').length) {
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
-                // The type of chart we want to create
                 type: 'line',
-
-                // The data for our dataset
                 data: {
                     // labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     labels: {!! json_encode($chart['labels']) !!},
